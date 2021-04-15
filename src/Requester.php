@@ -5,6 +5,7 @@ namespace PierreBelin\Universign;
 use Globalis\Universign\Response\TransactionDocument as ResponseTransactionDocument;
 use PierreBelin\Universign\Request\TransactionFilter;
 use PierreBelin\Universign\Request\TransactionRequest;
+use PierreBelin\Universign\Response\DocumentResponse;
 use PierreBelin\Universign\Response\TransactionResponse;
 use PierreBelin\Universign\Response\TransactionDocument;
 use UnexpectedValueException;
@@ -114,7 +115,7 @@ class Requester
             $nbDocuments = $response->value()->arraysize();
 
             for ($i = 0; $i < $nbDocuments; $i++) {
-                $test = new TransactionResponse($response->value());
+                $test = new DocumentResponse($response->value());
                 $data[] = $test;
             }
 
