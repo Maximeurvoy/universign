@@ -8,6 +8,7 @@ use PierreBelin\Universign\Request\TransactionRequest;
 use PierreBelin\Universign\Response\DocumentResponse;
 use PierreBelin\Universign\Response\TransactionResponse;
 use PierreBelin\Universign\Response\TransactionDocument;
+use PierreBelin\Universign\Response\TransactionInfo;
 use UnexpectedValueException;
 
 require_once dirname(__DIR__) . '/lib/xmlrpc/xmlrpc.inc';
@@ -126,6 +127,31 @@ class Requester
         throw new UnexpectedValueException($response);
     }
 
+
+        /** 
+     * Get a list of id who match with a status type
+     * @param   TransactionFilter
+     * @return  string[]
+     */
+    public function transactionInfo($transactionId)
+    {
+        $client = $this->getClient();
+        // $request = new \xmlrpcmsg('requester.listTransactions', [new \xmlrpcval($filter, int)]);
+        $request = new \xmlrpcmsg('requester.getTransactionInfo', [new \xmlrpcval($transactionId, 'string')]);
+        $response = &$client->send($request);
+
+        if (!$response->faultCode()) {
+            $nbDocuments = $response->value()->arraysize();
+
+            for($i = 0; $i < $nbDocuments; $i++){
+                $data[] = new TransactionInfo($response->value()->arraymem($i));
+            }
+
+            return $data;
+        } 
+
+        throw new UnexpectedValueException($response);
+    }
 
     private function getURLRequest()
     {
