@@ -115,7 +115,7 @@ class Requester
 
             for ($i = 0; $i < $nbDocuments; $i++) {
                 $test = new TransactionResponse($response->value());
-                $data[] = $test->getId();
+                $data[] = $test;
             }
 
             return $data;
