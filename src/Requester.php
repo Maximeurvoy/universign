@@ -95,24 +95,29 @@ class Requester
         throw new UnexpectedValueException($response);
     }
 
+
+      /** 
+     * Get id from status
+     * 
+     * @param   TransactionFilter
+     * @return  string[]
+     */
     public function filterTransaction(TransactionFilter $transactionFilter)
     {
         $client = $this->getClient();
         // $request = new \xmlrpcmsg('requester.listTransactions', [new \xmlrpcval($filter, int)]);
         $request = new \xmlrpcmsg('requester.listTransactions', [$transactionFilter->buildRpcValues()]);
         $response = &$client->send($request);
-
-       
         
         if (!$response->faultCode()) {
            return $response->value()->arraysize();
-        //     $nbDocuments = $response->value()->arraysize();
+            $nbDocuments = $response->value()->arraysize();
 
-        //     for ($i = 0; $i < $nbDocuments; $i++) {
-        //         $data[] = new TransactionDocument($response->value()->arraymem($i));
-        //     }
+            for ($i = 0; $i < $nbDocuments; $i++) {
+                $data[] = $response->value()->arraymem($i);
+            }
 
-        //     return $data;
+            return $data;
         }
 
         throw new UnexpectedValueException($response);
