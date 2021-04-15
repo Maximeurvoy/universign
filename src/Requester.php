@@ -71,7 +71,7 @@ class Requester
         throw new UnexpectedValueException($response);
     }
     
-    = $test;
+   
     /** 
      * Get documents for transactionId
      * 
@@ -117,7 +117,7 @@ class Requester
 
             for ($i = 0; $i < $nbDocuments; $i++) {
                 $id = ["id"=>$response->value()];
-                $data[] = new DocumentResponse($id);
+                $data[] = new DocumentResponse(new \xmlrpcval($id));
             }
 
             return $data;
