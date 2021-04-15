@@ -70,7 +70,8 @@ class Requester
 
         throw new UnexpectedValueException($response);
     }
-
+    
+    = $test;
     /** 
      * Get documents for transactionId
      * 
@@ -115,7 +116,8 @@ class Requester
             $nbDocuments = $response->value()->arraysize();
 
             for ($i = 0; $i < $nbDocuments; $i++) {
-                $data[] = new DocumentResponse($response->value());
+                $id = ["id"=>$response->value()];
+                $data[] = new DocumentResponse($id);
             }
 
             return $data;
