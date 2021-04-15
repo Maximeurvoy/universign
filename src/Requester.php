@@ -71,8 +71,8 @@ class Requester
 
         throw new UnexpectedValueException($response);
     }
-    
-   
+
+
     /** 
      * Get documents for transactionId
      * 
@@ -88,12 +88,12 @@ class Requester
         if (!$response->faultCode()) {
             $nbDocuments = $response->value()->arraysize();
 
-            for($i = 0; $i < $nbDocuments; $i++){
+            for ($i = 0; $i < $nbDocuments; $i++) {
                 $data[] = new TransactionDocument($response->value()->arraymem($i));
             }
 
             return $data;
-        } 
+        }
 
         throw new UnexpectedValueException($response);
     }
@@ -118,7 +118,7 @@ class Requester
             for ($i = 0; $i < $nbDocuments; $i++) {
                 $result = $response->value()->scalarval();
                 $value  = $result[$i]->me['string'];
-                $data[]=$value;
+                $data[] = $value;
             }
 
             return $data;
@@ -128,7 +128,7 @@ class Requester
     }
 
 
-        /** 
+    /** 
      * Get a list of id who match with a status type
      * @param   TransactionFilter
      * @return  string[]
@@ -140,15 +140,17 @@ class Requester
         $request = new \xmlrpcmsg('requester.getTransactionInfo', [new \xmlrpcval($transactionId, 'string')]);
         $response = &$client->send($request);
 
+        return $response;
+
         if (!$response->faultCode()) {
             $nbDocuments = $response->value()->arraysize();
 
-            for($i = 0; $i < $nbDocuments; $i++){
+            for ($i = 0; $i < $nbDocuments; $i++) {
                 $data[] = new TransactionInfo($response->value()->arraymem($i));
             }
 
             return $data;
-        } 
+        }
 
         throw new UnexpectedValueException($response);
     }
