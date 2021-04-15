@@ -3,6 +3,7 @@
 namespace PierreBelin\Universign;
 
 use Globalis\Universign\Response\TransactionDocument as ResponseTransactionDocument;
+use PierreBelin\Universign\Request\TransactionFilter;
 use PierreBelin\Universign\Request\TransactionRequest;
 use PierreBelin\Universign\Response\TransactionResponse;
 use PierreBelin\Universign\Response\TransactionDocument;
@@ -93,6 +94,29 @@ class Requester
 
         throw new UnexpectedValueException($response);
     }
+
+    public function filterTransaction(TransactionFilter $transactionFilter)
+    {
+        $client = $this->getClient();
+        // $request = new \xmlrpcmsg('requester.listTransactions', [new \xmlrpcval($filter, int)]);
+        $request = new \xmlrpcmsg('requester.listTransactions', [$transactionFilter->buildRpcValues()]);
+        $response = &$client->send($request);
+
+       
+        dd($response);
+        // if (!$response->faultCode()) {
+        //     $nbDocuments = $response->value()->arraysize();
+
+        //     for ($i = 0; $i < $nbDocuments; $i++) {
+        //         $data[] = new TransactionDocument($response->value()->arraymem($i));
+        //     }
+
+        //     return $data;
+        // }
+
+        throw new UnexpectedValueException($response);
+    }
+
 
     private function getURLRequest() 
     {
