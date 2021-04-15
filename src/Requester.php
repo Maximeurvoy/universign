@@ -20,7 +20,7 @@ class Requester
     private $userPassword;
     private $isTest;
 
-    function __construct($userMail, $userPassword,$isTest)
+    function __construct($userMail, $userPassword, $isTest)
     {
         $this->userMail = $userMail;
         $this->userPassword = $userPassword;
@@ -41,11 +41,11 @@ class Requester
 
         if (!$response->faultCode()) {
             return new TransactionResponse($response->value());
-        } 
+        }
 
         throw new UnexpectedValueException($response);
     }
-    
+
     /** 
      * Get documents for customId
      * 
@@ -61,12 +61,12 @@ class Requester
         if (!$response->faultCode()) {
             $nbDocuments = $response->value()->arraysize();
 
-            for($i = 0; $i < $nbDocuments; $i++){
+            for ($i = 0; $i < $nbDocuments; $i++) {
                 $data[] = new TransactionDocument($response->value()->arraymem($i));
             }
 
             return $data;
-        } 
+        }
 
         throw new UnexpectedValueException($response);
     }
@@ -86,18 +86,18 @@ class Requester
         if (!$response->faultCode()) {
             $nbDocuments = $response->value()->arraysize();
 
-            for($i = 0; $i < $nbDocuments; $i++){
+            for ($i = 0; $i < $nbDocuments; $i++) {
                 $data[] = $response->value()->arraymem($i);
             }
 
             return $data;
-        } 
+        }
 
         throw new UnexpectedValueException($response);
     }
 
 
-      /** 
+    /** 
      * Get id from status
      * 
      * @param   TransactionFilter
@@ -109,15 +109,13 @@ class Requester
         // $request = new \xmlrpcmsg('requester.listTransactions', [new \xmlrpcval($filter, int)]);
         $request = new \xmlrpcmsg('requester.listTransactions', [$transactionFilter->buildRpcValues()]);
         $response = &$client->send($request);
-        
+
         if (!$response->faultCode()) {
-           
+
             $nbDocuments = $response->value()->arraysize();
 
             for ($i = 0; $i < $nbDocuments; $i++) {
-                $test = new DocumentResponse();
-                $test->setId($response->value());
-                $data[] = $test;
+                $data[] = new DocumentResponse($response->value());
             }
 
             return $data;
@@ -127,15 +125,16 @@ class Requester
     }
 
 
-    private function getURLRequest() 
+    private function getURLRequest()
     {
-        if($this->isTest) {
-            return 'https://' . $this->userMail . ':'. $this->userPassword  . '@ws.test.universign.eu/sign/rpc/';
+        if ($this->isTest) {
+            return 'https://' . $this->userMail . ':' . $this->userPassword  . '@ws.test.universign.eu/sign/rpc/';
         }
-        return 'https://' . $this->userMail . ':'. $this->userPassword  . '@ws.universign.eu/sign/rpc/';
+        return 'https://' . $this->userMail . ':' . $this->userPassword  . '@ws.universign.eu/sign/rpc/';
     }
-    
-    private function getClient() {
+
+    private function getClient()
+    {
         $client = new \xmlrpc_client($this->getURLRequest());
         $client->setSSLVerifyHost(1);
         $client->setSSLVerifyPeer(1);
