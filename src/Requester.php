@@ -103,8 +103,9 @@ class Requester
         $response = &$client->send($request);
 
        
-        dd($response);
-        // if (!$response->faultCode()) {
+        
+        if (!$response->faultCode()) {
+           return $response->value();
         //     $nbDocuments = $response->value()->arraysize();
 
         //     for ($i = 0; $i < $nbDocuments; $i++) {
@@ -112,7 +113,7 @@ class Requester
         //     }
 
         //     return $data;
-        // }
+        }
 
         throw new UnexpectedValueException($response);
     }
