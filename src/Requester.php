@@ -115,7 +115,8 @@ class Requester
             $nbDocuments = $response->value()->arraysize();
 
             for ($i = 0; $i < $nbDocuments; $i++) {
-                $test = new DocumentResponse($response->value());
+                $test = new DocumentResponse();
+                $test->setId($response->value());
                 $data[] = $test;
             }
 
