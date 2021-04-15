@@ -99,8 +99,7 @@ class Requester
 
 
     /** 
-     * Get id from status
-     * 
+     * Get a list of id who match with a status type
      * @param   TransactionFilter
      * @return  string[]
      */
@@ -118,7 +117,6 @@ class Requester
             for ($i = 0; $i < $nbDocuments; $i++) {
                 $result = $response->value()->scalarval();
                 $value  = $result[$i]->me['string'];
-                // $data[] = $response->value()->arraymem($i);
                 $data[]=$value;
             }
 
