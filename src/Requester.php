@@ -117,7 +117,7 @@ class Requester
 
             for ($i = 0; $i < $nbDocuments; $i++) {
                 $result = $response->value()->scalarval();
-                $value  = $result[0]->me['string'];
+                $value  = $result[$i]->me['string'];
                 // $data[] = $response->value()->arraymem($i);
                 $data[]=$value;
             }
