@@ -87,12 +87,12 @@ class Requester
         if (!$response->faultCode()) {
             $nbDocuments = $response->value()->arraysize();
 
-            for ($i = 0; $i < $nbDocuments; $i++) {
-                $data[] = $response->value()->arraymem($i);
+            for($i = 0; $i < $nbDocuments; $i++){
+                $data[] = new TransactionDocument($response->value()->arraymem($i));
             }
 
             return $data;
-        }
+        } 
 
         throw new UnexpectedValueException($response);
     }
