@@ -86,7 +86,7 @@ class Requester
             $nbDocuments = $response->value()->arraysize();
 
             for($i = 0; $i < $nbDocuments; $i++){
-                $data[] = new TransactionDocument($response->value()->arraymem($i));
+                $data[] = $response->value()->arraymem($i);
             }
 
             return $data;
