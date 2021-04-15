@@ -116,7 +116,10 @@ class Requester
             $nbDocuments = $response->value()->arraysize();
 
             for ($i = 0; $i < $nbDocuments; $i++) {
-                $data[] = $response->value()->arraymem($i)[0];
+                $result = $response->value()->scalarval();
+                $value  = $result[0]->me['string'];
+                // $data[] = $response->value()->arraymem($i);
+                $data[]=$value;
             }
 
             return $data;
