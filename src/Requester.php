@@ -110,7 +110,7 @@ class Requester
         $response = &$client->send($request);
         
         if (!$response->faultCode()) {
-           return $response->value()->arraysize();
+           
             $nbDocuments = $response->value()->arraysize();
 
             for ($i = 0; $i < $nbDocuments; $i++) {
