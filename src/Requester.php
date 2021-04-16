@@ -144,10 +144,8 @@ class Requester
 
         if (!$response->faultCode()) {
             
-                $data[] = new TransactionInfo($response->value()->arraymem($i));
+            return     new TransactionInfo($response->value());
             
-
-            return $data;
         }
 
         throw new UnexpectedValueException($response);
