@@ -143,11 +143,9 @@ class Requester
         // return $response;
 
         if (!$response->faultCode()) {
-            $nbDocuments = $response->value()->arraysize();
-
-            for ($i = 0; $i < $nbDocuments; $i++) {
+            
                 $data[] = new TransactionInfo($response->value()->arraymem($i));
-            }
+            
 
             return $data;
         }
