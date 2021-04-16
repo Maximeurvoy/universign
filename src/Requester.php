@@ -140,7 +140,7 @@ class Requester
         $request = new \xmlrpcmsg('requester.getTransactionInfo', [new \xmlrpcval($transactionId, 'string')]);
         $response = &$client->send($request);
 
-        return $response;
+        // return $response;
 
         if (!$response->faultCode()) {
             $nbDocuments = $response->value()->arraysize();
