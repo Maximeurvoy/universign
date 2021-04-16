@@ -129,9 +129,9 @@ class Requester
 
 
     /** 
-     * Get a list of id who match with a status type
-     * @param   TransactionFilter
-     * @return  string[]
+     * Get a list of information about the transaction like status
+     * @param   string transactionId
+     * @return  TransactionInfo
      */
     public function transactionInfo($transactionId)
     {
@@ -141,6 +141,28 @@ class Requester
         $response = &$client->send($request);
 
         // return $response;
+
+        if (!$response->faultCode()) {
+            
+            return     new TransactionInfo($response->value());
+            
+        }
+
+        throw new UnexpectedValueException($response);
+    }
+
+ /** 
+     * Relaunch the transaction
+     * @param   TransactionFilter
+     * @return  string[]
+     */
+    public function relaunchTransaction($transactionId)
+    {
+        $client = $this->getClient();
+        $request = new \xmlrpcmsg('requester.relaunchTransaction', [new \xmlrpcval($transactionId, 'string')]);
+        $response = &$client->send($request);
+
+        return $response;
 
         if (!$response->faultCode()) {
             
