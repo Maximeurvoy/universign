@@ -162,9 +162,7 @@ class Requester
         $request = new \xmlrpcmsg('requester.relaunchTransaction', [new \xmlrpcval($transactionId, 'string')]);
         $response = &$client->send($request);
 
-        return $response;
-
-        if (!$response->faultCode()) {
+       if (!$response->faultCode()) {
             
             return     new TransactionInfo($response->value());
             
