@@ -164,7 +164,7 @@ class Requester
 
        if (!$response->faultCode()) {
             
-            return     new TransactionInfo($response->value());
+            return     $response->value();
             
         }
 
