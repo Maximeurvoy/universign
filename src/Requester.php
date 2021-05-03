@@ -173,9 +173,14 @@ return $response;
 
     private function getURLRequest()
     {
+        // if ($this->isTest) {
+        //     return 'https://' . $this->userMail . ':' . $this->userPassword  . '@ws.test.universign.eu/sign/rpc/';
+        // }
         if ($this->isTest) {
-            return 'https://' . $this->userMail . ':' . $this->userPassword  . '@ws.test.universign.eu/sign/rpc/';
+            return 'https://' . $this->userMail . ':' . $this->userPassword  . '@sign.test.cryptolog.com/sign/rpc/';
         }
+
+        
         return 'https://' . $this->userMail . ':' . $this->userPassword  . '@ws.universign.eu/sign/rpc/';
     }
 
