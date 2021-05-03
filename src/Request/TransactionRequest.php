@@ -31,6 +31,7 @@ class TransactionRequest extends Base
         'language' => 'string',
         'handwrittenSignature' => 'bool',
         'chainingMode' => 'string',
+        'registrationCallbackURL' => 'string',
     ];
 
     public function addSigner(TransactionSigner $signer)
