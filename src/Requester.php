@@ -43,7 +43,7 @@ class Requester
         if (!$response->faultCode()) {
             return new TransactionResponse($response->value());
         }
-return($client);
+dd($request);
         throw new UnexpectedValueException($response);
     }
 
