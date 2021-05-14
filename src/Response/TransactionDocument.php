@@ -12,7 +12,7 @@ class TransactionDocument extends Base
         'checkBoxTexts' => true,
         'metaData' => true,
         'displayName' => true,
-        'signatureFields' => true,
+        // 'signatureFields' => true,
         'SEPAData' => true,
     ];
 }
