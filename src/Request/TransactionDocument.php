@@ -21,5 +21,6 @@ class TransactionDocument extends Base
         'name'            => 'string',
         'title'           => 'string',
         'SEPAData' => 'PierreBelin\Universign\Request\SEPAData',
+        'signatureFields' => 'PierreBelin\Universign\Request\SignatureField',
     ];
 }
