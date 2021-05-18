@@ -69,7 +69,7 @@ class Requester
             return $data;
         }
 
-        throw new UnexpectedValueException($response);
+        throw new UnexpectedValueException($response->errstr);
     }
 
 
@@ -95,7 +95,7 @@ class Requester
             return $data;
         }
 
-        throw new UnexpectedValueException($response);
+        throw new UnexpectedValueException($response->errstr);
     }
 
 
@@ -124,7 +124,7 @@ class Requester
             return $data;
         }
 
-        throw new UnexpectedValueException($response);
+        throw new UnexpectedValueException($response->errstr);
     }
 
 
@@ -180,7 +180,6 @@ class Requester
             return 'https://' . $this->userMail . ':' . $this->userPassword  . '@sign.test.cryptolog.com/sign/rpc/';
         }
 
-        
         return 'https://' . $this->userMail . ':' . $this->userPassword  . '@ws.universign.eu/sign/rpc/';
     }
 
