@@ -44,7 +44,7 @@ class Requester
             return new TransactionResponse($response->value());
         }
 
-        throw new UnexpectedValueException($response);
+        throw new UnexpectedValueException($response->errstr);
     }
 
     /** 
