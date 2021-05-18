@@ -148,7 +148,7 @@ class Requester
             
         }
 
-        throw new UnexpectedValueException($response);
+        throw new UnexpectedValueException($response->errstr);
     }
 
  /** 
@@ -167,7 +167,7 @@ class Requester
             return     $response->value();
             
         }
-return $response;
+
         throw new UnexpectedValueException($response->errstr);
     }
 
